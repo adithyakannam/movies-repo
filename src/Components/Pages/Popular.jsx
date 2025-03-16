@@ -37,7 +37,6 @@ const Popular = () => {
     fetchData();
   }, [searchParams]);
 
-  const memoizedMovies = useMemo(() => movies, [movies]);
 
   if (loading) {
     return (
@@ -59,7 +58,7 @@ const Popular = () => {
     <div className="container">
       <h2 className="text-center heading">Most Popular</h2>
       <div className="movie-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
-        {memoizedMovies.map((item, index) => {
+        {movies.map((item, index) => {
           let imageUrl = item.images.poster?.[0] || item.movie.thumb?.[0];
 
           if (imageUrl && !imageUrl.startsWith("https://")) {
