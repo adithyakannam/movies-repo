@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams, NavLink, useNavigate } from "react-router-dom";
+import { useLocation, useParams, NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import Api from "../API/Api";
+import { FaSleigh } from "react-icons/fa";
+import { CastSkeleton } from "./Loading/LoadingSkelton";
 
 const Related = () => {
   const [related, setRelated] = useState([]);
   const { name, type, genreType } = useParams();
+  const [loading,setLoading] = useState(false)
   const location = useLocation();
   const navigate = useNavigate();
+  const [setSearchParams] = useSearchParams()
 
   const searchType = location.pathname.includes("/genre/")
   ? "movies"
@@ -15,6 +19,7 @@ const Related = () => {
   : "shows";
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       let searchUrl;
       if (genreType) {
         searchUrl = `movies/${name}`;
@@ -24,10 +29,12 @@ const Related = () => {
       try {
         const response4 = await Api.get(`${searchType}/${name}/related?extended=images`);
         setRelated(response4.data);
+        setLoading(false)
       } catch (error) {
         console.log(error);
       }
     };
+    
     fetchData();
   }, [name, type, genreType, location.pathname]);
 
@@ -37,6 +44,10 @@ const Related = () => {
     const newPath = pathParts.join('/');
     navigate(newPath, { state: { from: location.pathname } });
   };
+
+  if(loading){
+    return <CastSkeleton/>
+  }
 
   return (
     <div className="recommendation-section mx-2">

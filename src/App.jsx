@@ -27,7 +27,8 @@ function App() {
             <Route path="shows/:name" element={<Movie />} />
             <Route path="genre/:type" element={<GenreMovies />} />
             <Route path="genre/:type/movies/:name" element={<Movie />} />
-            <Route path="upcomming" element={<UpComming />} />
+            <Route path="up-comming" element={<UpComming />} />
+            <Route path="up-comming/movies/:name" element={<Movie />} />
             <Route path="trailer" element={<Trailer />} />
             <Route path="*" element={<Fallback />} />
           </Route>

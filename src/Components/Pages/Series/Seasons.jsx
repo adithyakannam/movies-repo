@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
-import {
-  NavLink,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Api from "../../../API/Api";
+import { SeasonSkeleton } from "../../Loading/LoadingSkelton";
 
 const Seasons = ({ showName }) => {
   const [seasonsData, setSeasonsData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
     try {
+      setLoading(true);
       const response = await Api.get(
         `shows/${showName}/seasons?extended=episodes,full,images`
       );
       setSeasonsData(response.data);
+      setLoading(false);
       // Set default season to the first season
     } catch (error) {
       console.log(error);
@@ -30,6 +29,9 @@ const Seasons = ({ showName }) => {
   const handleSeasonClick = (seasonNumber) => {
     setSearchParams({ season: seasonNumber });
   };
+  if (loading) {
+    return <SeasonSkeleton />;
+  }
 
   return (
     <div className="bg-transparent">
@@ -109,7 +111,7 @@ const Seasons = ({ showName }) => {
                   {season.episodes.map((episode) => (
                     <li
                       key={episode.number}
-                      className="rounded-lg p-2 shadow-md hover:shadow-lg transition flex items-center border-x-2  border-blue-500 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30"
+                      className="rounded-lg p-2 shadow-md hover:shadow-lg transition flex items-center borde-r-2  border-blue-500 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30"
                     >
                       <img
                         src={`https://${episode.images.screenshot[0]}`}
