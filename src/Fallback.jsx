@@ -1,5 +1,4 @@
 import React from "react";
-import error from "./assets/web-maintenance.png";
 
 const Fallback = () => {
   return (
@@ -16,6 +15,7 @@ const Fallback = () => {
         404
         <span > ERROR</span>
       </h1>
+      <p className="text-center text-3xl text-red-500 font-semibold">Working on it</p>
     </div>
   );
 };

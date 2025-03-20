@@ -23,11 +23,11 @@ const ButtonComponent = () => {
 
   // Reset page number to 1 when `type` changes
 
-  useEffect(() => {
-    if(searchParams.has("type")){
-      setState(1);
-    }
-  }, [searchParams.get("type")]);
+  // useEffect(() => {
+  //   if(searchParams.has("type")){
+  //     setState(1);
+  //   }
+  // }, [searchParams.get("type")]);
 
   const incrementCounter = () => {
     setState((prev) => prev + 1);

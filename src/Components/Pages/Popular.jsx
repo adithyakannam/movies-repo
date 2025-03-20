@@ -1,15 +1,8 @@
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import {
-  HiOutlineArrowSmallLeft,
-  HiOutlineArrowSmallRight,
-} from "react-icons/hi2";
 import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 import Api from "../../API/Api";
-import LoadingSkelton from "../Carousel/LoadingSkelton";
+import LoadingSkelton from "../Loading/LoadingSkelton";
 import ButtonComponent from "../../ButtonFunctions/ButtonComponent";
-import { BiSolidEditLocation } from "react-icons/bi";
-import Features from "./Features";
 
 const Popular = () => {
   const [movies, setMovies] = useState([]);
@@ -37,20 +30,9 @@ const Popular = () => {
     fetchData();
   }, [searchParams]);
 
-
   if (loading) {
     return (
-      <div className="container">
-        <SkeletonTheme
-          baseColor="#bab6b6"
-          highlightColor="#444"
-          direction="ltr"
-        >
-          <p className="movie-cards">
-            <Skeleton count={20} containerClassName="loading-card" />
-          </p>
-        </SkeletonTheme>
-      </div>
+      <LoadingSkelton/>
     );
   }
 
@@ -77,7 +59,7 @@ const Popular = () => {
                   alt={item.title}
                   className="w-full h-auto"
                 />
-                <p className="movie-info-popular">{item.title}</p>
+                <p className="movie-title-card text-lg">{item.title}</p>
               </div>
             </NavLink>
           );

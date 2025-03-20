@@ -21,7 +21,7 @@ const Trailer = ({ src }) => {
   console.log("running");
 
   return (
-    <div className="relative flex justify-center items-center w-full h-full ">
+    <div className="relative flex justify-center items-center w-full h-full overflow-hidden ">
       {videoUrl ? (
         <iframe
           width="914"

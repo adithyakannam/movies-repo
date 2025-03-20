@@ -10,6 +10,9 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
     setIsInWatchlist(!isInWatchlist);
   };
 
+  const fallbackImage =
+    "img.freepik.com/free-photo/assortment-movie-elements-red-background-with-copy-space_23-2148457859.jpg?t=st=1741628541~exp=1741632141~hmac=a28963ec3815792e81a863be1540adaa17ba85b8acec2b231e909f8a90e3c47a&w=900";
+
   return (
     <div
       //   ref={containerRef}
@@ -27,7 +30,7 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
       <div className="absolute z-[-1] inset-0">
         <img
           className="w-full h-full object-cover object-center fixed brightness-50"
-          src={`https://${movie.images.fanart[0]}?w=248&fit=crop&auto=format`}
+          src={`https://${movie.images.fanart?.[0] || fallbackImage}`}
           alt={movie.title}
         />
       </div>
@@ -38,8 +41,7 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
         <div className="w-[250px] flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
           <img
             className="w-full h-auto object-cover"
-            srcSet={`https://${movie.images.poster[0]}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            src={`https://${movie.images.poster[0]}?w=248&fit=crop&auto=format`}
+            src={`https://${movie.images.poster?.[0] || fallbackImage}`}
             alt={movie.title}
           />
         </div>

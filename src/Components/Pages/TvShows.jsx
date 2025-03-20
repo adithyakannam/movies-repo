@@ -2,9 +2,10 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import React, { useEffect, useState, useRef } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import Api from "../../API/Api";
-import LoadingSkelton from "../Carousel/LoadingSkelton";
+import LoadingSkelton from "../Loading/LoadingSkelton";
 import ButtonComponent from "../../ButtonFunctions/ButtonComponent";
 import ButtonType from "../../ButtonFunctions/ButtonType";
+import { MdHeight } from "react-icons/md";
 
 const TvShows = () => {
   const [shows, setShows] = useState([]);
@@ -16,6 +17,7 @@ const TvShows = () => {
     const fetchData = async () => {
       let type = searchParams.get("type") || "played";
       try {
+        setLoading(true)
         const response1 = await Api.get(
           `/shows/${type}?extended=images&page=${searchParams.get(
             "page"
@@ -34,17 +36,7 @@ const TvShows = () => {
 
   if (loading) {
     return (
-      <div className="container">
-        <SkeletonTheme
-          baseColor="#bab6b6"
-          highlightColor="#444"
-          direction="ltr"
-        >
-          <p className="movie-cards">
-            <Skeleton count={20} containerClassName="loading-card" />
-          </p>
-        </SkeletonTheme>
-      </div>
+      <LoadingSkelton />
     );
   }
 
@@ -83,7 +75,7 @@ const TvShows = () => {
                   alt={item.show.title}
                   className="w-full h-auto"
                 />
-                <p className="">
+                <p className="movie-title-card">
                   {item.show.title}
                 </p>
               </div>

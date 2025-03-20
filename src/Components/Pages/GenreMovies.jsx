@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Api from "../../API/Api";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useLocation, useSearchParams, useParams, NavLink } from "react-router-dom";
+import LoadingSkelton from "../Loading/LoadingSkelton";
 
 const GenreMovies = () => {
   const location = useLocation();
@@ -27,17 +28,7 @@ const {type} = useParams()
 
   if (loading) {
     return (
-      <div className="container">
-        <SkeletonTheme
-          baseColor="#bab6b6"
-          highlightColor="#444"
-          direction="ltr"
-        >
-          <p className="movie-cards">
-            <Skeleton count={20} containerClassName="loading-card" />
-          </p>
-        </SkeletonTheme>
-      </div>
+     <LoadingSkelton/>
     );
   }
 

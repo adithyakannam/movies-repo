@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TrendingCarousel from "../Carousel/TrendingCarousel";
+import TrendingCarousel from "../Loading/TrendingCarousel";
 import Api from "../../API/Api";
 import Features from "./Features";
 import { BiCameraMovie } from "react-icons/bi";

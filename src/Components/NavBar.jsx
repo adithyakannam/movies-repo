@@ -13,7 +13,7 @@ const NavBar = () => {
     if (containerRef.current) {
       containerRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [name,type]);
+  }, [name,type,searchParams.get("page")]);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +63,7 @@ const NavBar = () => {
             Tv Shows
           </NavLink>
           <NavLink
-            to="upcomming"
+            to="up-comming"
             style={({ isActive }) => (isActive ? activeStyle : null)}
           >
             Upcoming
