@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { deleteMovie } from "../../MovieSlice";
+import { deleteMovie } from "../../redux/movieSlice";
 
 const Watchlist = () => {
   const movies = useSelector((state) => state.movies.movies);

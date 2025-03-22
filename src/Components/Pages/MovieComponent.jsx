@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
-import { addMovie, deleteMovie } from "../../MovieSlice";
+import { addMovie, deleteMovie } from "../../redux/movieSlice";
 
 const MovieComponent = ({ movie, handleShowTrailer }) => {
   const navigate = useNavigate();
