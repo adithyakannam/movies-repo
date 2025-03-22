@@ -1,21 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { addMovie, deleteMovie } from "../../MovieSlice";
 
 const MovieComponent = ({ movie, handleShowTrailer }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isInWatchlist, setIsInWatchlist] = useState(false);
+  const moviesList = useSelector((state)=>state.movies.movies)
+const location = useLocation();
 
-  const toggleWatchlist = () => {
-    setIsInWatchlist(!isInWatchlist);
+  const toggleWatchlist = (movie) => {
+    if (!isInWatchlist) {
+      setIsInWatchlist((prev) => !prev);
+     const movieType = location.pathname.includes("/genre/")
+      ? "movies"
+      : location.pathname.includes("/movies/")
+      ? "movies"
+      : "shows";
+    dispatch(addMovie({id:movie.ids.imdb,movie:movie,type:movieType}));
+    } else {
+      setIsInWatchlist((prev) => !prev);
+      dispatch(deleteMovie());
+      dispatch(deleteMovie(movie.ids.imdb))
+    }
+
   };
+  useEffect(()=>{
+    moviesList.forEach(item => {
+      if(item.id == movie.ids.imdb){
+        setIsInWatchlist(true)
+      }
+    });
+  },[])
 
   const fallbackImage =
     "img.freepik.com/free-photo/assortment-movie-elements-red-background-with-copy-space_23-2148457859.jpg?t=st=1741628541~exp=1741632141~hmac=a28963ec3815792e81a863be1540adaa17ba85b8acec2b231e909f8a90e3c47a&w=900";
 
   return (
     <div
-      //   ref={containerRef}
       className="relative flex justify-center items-center w-full h-screen"
     >
       {/* Back Button */}
@@ -47,7 +71,7 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
         </div>
 
         <div className="text-white opacity-100 px-5 py-4 backdrop-filter backdrop-blur-lg bg-opacity-30">
-          <p className="text-7xl font-bold text-blue-500 movie-title">
+          <p className="text-[3em] font-bold text-blue-500 movie-title">
             {movie.title}
           </p>
           <p className="italic text-gray-300">{movie.tagline}</p>
@@ -58,8 +82,9 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
               <strong>📅 Released:</strong>{" "}
               <span className=" font-bold text-blue-500">
                 {movie.released
-                  ? movie.released
-                  : movie.first_aired.slice(0, 10)}
+                  // ? movie.released
+                  // : movie.first_aired.slice(0, 10)
+                  }
               </span>
             </p>
             <p>
@@ -116,7 +141,7 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
               🌐 Visit Homepage
             </a>
             <button
-              onClick={toggleWatchlist}
+              onClick={() => toggleWatchlist(movie)}
               className={`px-4 py-2 rounded-lg font-semibold transition-all
                      ${
                        isInWatchlist

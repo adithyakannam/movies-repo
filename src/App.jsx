@@ -10,6 +10,7 @@ import UpComming from "./Components/Pages/UpComming";
 import NavBar from "./Components/NavBar";
 import Trailer from "./Components/Trailer";
 import Fallback from "./Fallback";
+import Watchlist from "./Components/Pages/WatchList";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
             <Route path="up-comming" element={<UpComming />} />
             <Route path="up-comming/movies/:name" element={<Movie />} />
             <Route path="trailer" element={<Trailer />} />
+            <Route path="watchlist" element={<Watchlist />} />
+            <Route path="watchlist/:type/:name" element={<Movie />} />
             <Route path="*" element={<Fallback />} />
           </Route>
         </Routes>

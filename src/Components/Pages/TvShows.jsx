@@ -73,7 +73,7 @@ const TvShows = () => {
                 <img
                   src={imageUrl}
                   alt={item.show.title}
-                  className="w-full h-auto"
+                  className=""
                 />
                 <p className="movie-title-card">
                   {item.show.title}
