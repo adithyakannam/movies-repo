@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { newMoviesApi } from "../../API/Api";
 import { NavLink } from "react-router-dom";
 import AutoSizer from "react-virtualized-auto-sizer";
@@ -13,10 +13,10 @@ const UpComming = () => {
 
   const fetchData = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await newMoviesApi.get();
       setMovies(response.data);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -26,8 +26,8 @@ const UpComming = () => {
     fetchData();
   }, []);
 
-  if(loading){
-    return <LoadingSkelton props={true}/>
+  if (loading) {
+    return <LoadingSkelton props={true} />;
   }
 
   const Cell = ({ columnIndex, rowIndex, style }) => {
@@ -61,10 +61,9 @@ const UpComming = () => {
   };
 
   return (
-    <div>
-      <h2 className="section-title mt-2">Up Comming</h2>
+    <div className="mx-auto p-4">
       {movies && (
-        <div style={{ height: "82vh", width: "100vw", overflowY: "auto" }}>
+        <div style={{ height: "calc(100vh - 18vh)", width: "100%", overflowY: "hidden" }}>
           <AutoSizer>
             {({ width, height }) => (
               <Grid

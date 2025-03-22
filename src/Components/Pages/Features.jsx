@@ -30,6 +30,7 @@ const Features = ({ movieList, title, ranking }) => {
                 loading="lazy"
                 alt={item.movie.title}
               />
+              
               <p>{item.movie.title}</p>
               {ranking && <p className="index">{index + 1}</p>}
             </NavLink>

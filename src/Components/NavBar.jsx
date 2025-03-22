@@ -79,7 +79,7 @@ const NavBar = () => {
                     state={item.slug}
                     className={"p-1 border-none"}
                   >
-                    <span className="">{item.name}</span>
+                    <span className="text-lg">{item.name}</span>
                   </NavLink>
                 </li>
               );
