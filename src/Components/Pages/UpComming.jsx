@@ -4,10 +4,12 @@ import { NavLink } from "react-router-dom";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { FixedSizeGrid as Grid } from "react-window";
 import LoadingSkelton from "../Loading/LoadingSkelton";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const UpComming = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { width } = useWindowSize(); // Get window width
   const fallbackImage =
     "img.freepik.com/free-photo/assortment-movie-elements-red-background-with-copy-space_23-2148457859.jpg?t=st=1741628541~exp=1741632141~hmac=a28963ec3815792e81a863be1540adaa17ba85b8acec2b231e909f8a90e3c47a&w=900";
 
@@ -30,8 +32,17 @@ const UpComming = () => {
     return <LoadingSkelton props={true} />;
   }
 
+  const getColumnCount = () => {
+    if (width > 1200) return 6;
+    if (width > 992) return 4;
+    if (width > 768) return 3;
+    return 2;
+  };
+
+  const columnCount = getColumnCount();
+
   const Cell = ({ columnIndex, rowIndex, style }) => {
-    const index = rowIndex * 6 + columnIndex;
+    const index = rowIndex * columnCount + columnIndex;
     if (index >= movies.length) return null;
     const item = movies[index].movie;
     let imageUrl = item.images.poster?.[0] || fallbackImage;
@@ -43,34 +54,37 @@ const UpComming = () => {
     return (
       <div style={style}>
         <NavLink
-          className="list-item"
           to={`/up-comming/movies/${item.ids.slug}`}
           state={"movies"}
+          className={`list-item `}
         >
-          <img
-            srcSet={`${imageUrl}`}
-            src={`${imageUrl}`}
-            loading="lazy"
-            alt={item.title}
-            className="w-full h-full object-cover rounded-lg shadow-md"
-          />
-          <p className="text-center mt-2">{item.title}</p>
+          <div className="movie-card">
+            <img src={imageUrl} alt={item.title} className="" />
+            <p className="movie-title-card text-lg">{item.title}</p>
+          </div>
         </NavLink>
       </div>
     );
   };
 
   return (
-    <div className="mx-auto p-4">
+    <div className="mx-auto">
       {movies && (
-        <div style={{ height: "calc(100vh - 18vh)", width: "100%", overflowY: "hidden" }}>
+        <div
+          style={{
+            height: "100vh",
+            width: "100%",
+            paddingTop: "5em",
+            overflow: "hidden",
+          }}
+        >
           <AutoSizer>
             {({ width, height }) => (
               <Grid
-                columnCount={6}
-                columnWidth={width / 6.1}
+                columnCount={columnCount}
+                columnWidth={width / (columnCount + 0.5)}
                 height={height}
-                rowCount={Math.ceil(movies.length / 6)}
+                rowCount={Math.ceil(movies.length / columnCount)}
                 rowHeight={350}
                 width={width}
               >

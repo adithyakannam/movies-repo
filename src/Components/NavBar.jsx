@@ -1,21 +1,28 @@
 import React, { useMemo, useRef, useEffect } from "react";
-import { NavLink, Link, Outlet, useSearchParams, useParams } from "react-router-dom";
+import {
+  NavLink,
+  Link,
+  Outlet,
+  useSearchParams,
+  useParams,
+} from "react-router-dom";
 import Api from "../API/Api";
 import { BiCameraMovie } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
 
 const NavBar = () => {
   const [genres, setGenres] = React.useState([]);
   const containerRef = useRef(null);
-  const [searchParams] = useSearchParams()
-  const {name,type} = useParams();
+  const [searchParams] = useSearchParams();
+  const { name, type } = useParams();
 
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [name,type,searchParams.get("page")]);
+  }, [name, type, searchParams.get("page")]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await Api.get("genres/movies");
@@ -33,6 +40,22 @@ const NavBar = () => {
   const activeStyle = {
     textDecoration: "#18a5c8 underline",
   };
+  useEffect(() => {
+    loginFunction();
+  }, []);
+  let authenticated = JSON.parse(localStorage.getItem("authenticated"));
+  const loginFunction = () => {
+    authenticated = JSON.parse(localStorage.getItem("authenticated"));
+    if (authenticated) {
+      return (
+        <span className="text-3xl">
+          <FaUserCircle />
+        </span>
+      );
+    } else {
+      return "Login";
+    }
+  };
 
   return (
     <div ref={containerRef}>
@@ -42,12 +65,6 @@ const NavBar = () => {
             <span className="inline-block text-4xl">
               <BiCameraMovie />
             </span>
-          </NavLink>
-          <NavLink
-            to="/"
-            style={({ isActive }) => (isActive ? activeStyle : null)}
-          >
-            Home
           </NavLink>
           <NavLink
             to="popular"
@@ -93,12 +110,10 @@ const NavBar = () => {
           </NavLink>
         </div>
         <div>
-          <Link
-          to={'watchlist'}
-          >WatchList</Link>
-          <Link
-          to={'Login'}
-          >Login</Link>
+          <Link to={"watchlist"}>WatchList</Link>
+          <Link to={`${authenticated ? "profile" : "login"}`}>
+            {loginFunction()}
+          </Link>
         </div>
       </nav>
       <div>

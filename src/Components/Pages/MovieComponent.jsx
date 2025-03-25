@@ -1,47 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addMovie, deleteMovie } from "../../redux/movieSlice";
+import { FaRegBookmark } from "react-icons/fa";
+import { IoBookmark } from "react-icons/io5";
 
 const MovieComponent = ({ movie, handleShowTrailer }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isInWatchlist, setIsInWatchlist] = useState(false);
-  const moviesList = useSelector((state)=>state.movies.movies)
-const location = useLocation();
+  const moviesList = useSelector((state) => state.movies.movies);
+  const location = useLocation();
 
   const toggleWatchlist = (movie) => {
-    if (!isInWatchlist) {
-      setIsInWatchlist((prev) => !prev);
-     const movieType = location.pathname.includes("/genre/")
-      ? "movies"
-      : location.pathname.includes("/movies/")
-      ? "movies"
-      : "shows";
-    dispatch(addMovie({id:movie.ids.imdb,movie:movie,type:movieType}));
+    const authenticated = localStorage.getItem("authenticated") === "true";
+    if (authenticated) {
+      if (!isInWatchlist) {
+        setIsInWatchlist((prev) => !prev);
+        const movieType = location.pathname.includes("/genre/")
+          ? "movies"
+          : location.pathname.includes("/movies/")
+          ? "movies"
+          : "shows";
+        dispatch(
+          addMovie({ id: movie.ids.imdb, movie: movie, type: movieType })
+        );
+      } else {
+        setIsInWatchlist((prev) => !prev);
+        dispatch(deleteMovie(movie.ids.imdb));
+      }
     } else {
-      setIsInWatchlist((prev) => !prev);
-      dispatch(deleteMovie());
-      dispatch(deleteMovie(movie.ids.imdb))
+      console.log("nope");
     }
-
   };
-  useEffect(()=>{
-    moviesList.forEach(item => {
-      if(item.id == movie.ids.imdb){
-        setIsInWatchlist(true)
+
+  useEffect(() => {
+    moviesList.forEach((item) => {
+      if (item.id == movie.ids.imdb) {
+        setIsInWatchlist(true);
       }
     });
-  },[])
+  }, []);
 
   const fallbackImage =
     "img.freepik.com/free-photo/assortment-movie-elements-red-background-with-copy-space_23-2148457859.jpg?t=st=1741628541~exp=1741632141~hmac=a28963ec3815792e81a863be1540adaa17ba85b8acec2b231e909f8a90e3c47a&w=900";
 
   return (
-    <div
-      className="relative flex justify-center items-center w-full h-screen"
-    >
+    <div className="relative flex justify-center items-center w-full h-screen">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
@@ -60,7 +66,7 @@ const location = useLocation();
       </div>
 
       {/* Content Container */}
-      <div className="flex flex-col md:flex-row items-center gap-8 px-8 md:px-16 py-10 rounded-lg w-[85%] mx-auto mt-10">
+      <div className="flex flex-col md:flex-row items-center gap-8 px-8 md:px-16 py-10 rounded-lg w-[85%]">
         {/* Movie Poster */}
         <div className="w-[250px] flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
           <img
@@ -81,10 +87,11 @@ const location = useLocation();
             <p>
               <strong>📅 Released:</strong>{" "}
               <span className=" font-bold text-blue-500">
-                {movie.released
+                {
+                  movie.released
                   // ? movie.released
                   // : movie.first_aired.slice(0, 10)
-                  }
+                }
               </span>
             </p>
             <p>
@@ -142,7 +149,7 @@ const location = useLocation();
             </a>
             <button
               onClick={() => toggleWatchlist(movie)}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all
+              className={`px-4 py-2 transition-all
                      ${
                        isInWatchlist
                          ? "bg-green-600 hover:bg-green-700 text-white"
@@ -150,7 +157,7 @@ const location = useLocation();
                      }
                   `}
             >
-              {isInWatchlist ? "✅ Added to Watchlist" : "➕ Add to Watchlist"}
+              {isInWatchlist ? <IoBookmark /> : <FaRegBookmark />}
             </button>
           </div>
         </div>

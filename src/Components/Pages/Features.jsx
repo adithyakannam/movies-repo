@@ -24,15 +24,16 @@ const Features = ({ movieList, title, ranking }) => {
               to={`/movies/${item.movie.ids.slug}`}
               state={"movies"}
             >
-              <img
-                srcSet={`${imageUrl}`}
-                src={`${imageUrl}`}
-                loading="lazy"
-                alt={item.movie.title}
-              />
-              
+              <div>
+                <img
+                  src={`${imageUrl}`}
+                  loading="lazy"
+                  alt={item.movie.title}
+                  className="h-[22em]"
+                />
+                {ranking && <span className="index">{index + 1}</span>}
+              </div>
               <p>{item.movie.title}</p>
-              {ranking && <p className="index">{index + 1}</p>}
             </NavLink>
           );
         })}

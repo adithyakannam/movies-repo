@@ -27,6 +27,7 @@ const Movie = () => {
   const [loading, setLoading] = useState(false);
   const [showTrailer, setShowTrailer] = useState(false);
   const [trailerSrc, setTrailerSrc] = useState("");
+  const [error, setError] = useState(null);
 
   const handleShowTrailer = (src) => {
     setTrailerSrc(src);
@@ -52,17 +53,18 @@ const Movie = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
-        setLoading(true);
-        const response1 = await Api.get(
-          `${searchType}/${name}?extended=full,images`
-        );
-        setMovie(response1.data);
-        setLoading(false);
-        const response2 = await Api.get(`${searchType}/${name}/seasons`);
-        setSeasons(response2.data);
+      const response1 = await Api.get(
+        `${searchType}/${name}?extended=full,images`
+      );
+      setMovie(response1.data);
+      const response2 = await Api.get(`${searchType}/${name}/seasons`);
+      setSeasons(response2.data);
       } catch (error) {
-        console.error("Error fetching data:");
+      setError(error);
+      } finally {
+      setLoading(false);
       }
     };
 
@@ -70,7 +72,7 @@ const Movie = () => {
   }, [name, type, location.pathname]);
 
   return (
-    <div className="relative">
+    <div className="relative ">
       {loading ? (
         <MovieSkeleton />
       ) : (

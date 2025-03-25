@@ -5,7 +5,6 @@ import Api from "../../API/Api";
 import LoadingSkelton from "../Loading/LoadingSkelton";
 import ButtonComponent from "../../ButtonFunctions/ButtonComponent";
 import ButtonType from "../../ButtonFunctions/ButtonType";
-import { MdHeight } from "react-icons/md";
 
 const TvShows = () => {
   const [shows, setShows] = useState([]);
@@ -54,7 +53,7 @@ const TvShows = () => {
           {"favorited"}
         </ButtonType>
       </div>
-      <div className="movie-cardsmovie-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
+      <div className="movie-cards">
         {shows.map((item, index) => {
           let imageUrl =
             item.show.images.poster?.[0] || item.show.images.thumb?.[0] || "";
@@ -73,7 +72,6 @@ const TvShows = () => {
                 <img
                   src={imageUrl}
                   alt={item.show.title}
-                  className=""
                 />
                 <p className="movie-title-card">
                   {item.show.title}

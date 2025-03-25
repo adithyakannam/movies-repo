@@ -40,7 +40,7 @@ const {type} = useParams()
                 let imageUrl = item.images.poster?.[0] || item.movie.thumb?.[0];
       
                 if (imageUrl && !imageUrl.startsWith("https://")) {
-                  imageUrl = "https://" + imageUrl; // Prepend protocol if missing
+                  imageUrl = "https://" + imageUrl;
                 }
                 return (
                   <NavLink
@@ -49,13 +49,12 @@ const {type} = useParams()
                     state={`popular/movies`}
                     className={`list-item`}
                   >
-                    <div className="movie-card rounded-lg overflow-hidden">
+                    <div className="movie-card ">
                       <img
                         src={imageUrl}
                         alt={item.title}
-                        className="w-full h-auto"
                       />
-                      <p className="movie-info-popular">
+                      <p className="">
                         {item.title}
                       </p>
                     </div>
