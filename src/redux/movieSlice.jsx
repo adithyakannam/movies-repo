@@ -12,7 +12,12 @@ const movieSlice = createSlice({
       state.movies.push(action.payload);
     },
     deleteMovie: (state, action) => {
-      state.movies = state.movies.filter((state) => state.movie.ids.imdb !== action.payload)
+      state.movies = state.movies.filter(
+        (state) => state.movie.ids.imdb !== action.payload
+      );
+    },
+    loadMovies: (state, action) => {
+      state.movies = action.payload;
     },
   },
 });

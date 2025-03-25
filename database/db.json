@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "c5b11",
+      "name": "John Doe",
+      "email": "johndoe@yahoo.com",
+      "password": "67890",
+      "phone": "5559876"
+    },
+    {
+      "id": "6f29",
+      "name": "Adithya",
+      "email": "ak@",
+      "password": "123",
+      "phone": "779922"
+    },
+    {
+      "id": "c03b",
+      "name": "aadithya",
+      "email": "aa@",
+      "password": "123",
+      "phone": "78786"
+    }
+  ],
+  "watchlist": [
+    {
+      "id": "c03b",
+      "moviesList": [
+        "tt0096697",
+        "tt3398228"
+      ]
+    }
+  ]
+}

@@ -39,7 +39,7 @@ const Popular = () => {
   return (
     <div className="container">
       <h2 className="text-center heading">Most Popular</h2>
-      <div className="movie-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+      <div className="movie-cards">
         {movies.map((item, index) => {
           let imageUrl = item.images.poster?.[0] || item.movie.thumb?.[0];
 
@@ -57,7 +57,6 @@ const Popular = () => {
                 <img
                   src={imageUrl}
                   alt={item.title}
-                  className="w-full h-auto"
                 />
                 <p className="movie-title-card text-lg">{item.title}</p>
               </div>

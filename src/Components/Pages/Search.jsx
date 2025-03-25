@@ -64,7 +64,6 @@ const Search = () => {
           const isMovie = item.type === "movie";
           const content = isMovie ? item.movie : item.show;
           let imageUrl = content.images.poster?.[0] || fallbackImage;
-          console.log(imageUrl);
 
           if (imageUrl && !imageUrl.startsWith("https://")) {
             imageUrl = "https://" + imageUrl; // Prepend protocol if missing

@@ -39,7 +39,7 @@ const CastList = () => {
 
   return (
     <div className="h-full">
-          <h1 className="text-center">Cast</h1>
+          <h1 className="text-center">Meet the Cast</h1>
           <ul className="grid-container">
             {cast.slice(0, 10).map((member) => (
               <li key={member.person.ids.slug} className="grid-item">

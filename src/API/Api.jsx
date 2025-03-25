@@ -1,5 +1,19 @@
 import axios from "axios";
 
+// import { initializeApp } from "firebase/app";
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCv_cAQhBHc1G72izpdxtjgL2l80UjbmDw",
+//   authDomain: "movies-6a915.firebaseapp.com",
+//   projectId: "movies-6a915",
+//   storageBucket: "movies-6a915.firebasestorage.app",
+//   messagingSenderId: "505970984411",
+//   appId: "1:505970984411:web:8197700b074546769f53fe",
+//   measurementId: "G-Y5E4Z8531B"
+// };
+
+// const app = initializeApp(firebaseConfig);
+
 const currentDate = new Date().toISOString().split("T")[0];
 
 const Api = axios.create({
@@ -26,3 +40,10 @@ const newMoviesApi = axios.create({
   },
 });
 export { newMoviesApi };
+
+const userFetch = () => {
+  baseURL: "localhost:3000";
+};
+export { userFetch };
+
+
