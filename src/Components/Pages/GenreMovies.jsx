@@ -35,7 +35,7 @@ const {type} = useParams()
   return (
     <div className="container">
       <h2 className="text-center bg-blue-500 p-2">Top Movies</h2>
-      <div className="movie-cards grid grid-cols-2 lg:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+      <div className="movie-cards ">
               {movies.map((item, index) => {
                 let imageUrl = item.images.poster?.[0] || item.movie.thumb?.[0];
       

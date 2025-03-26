@@ -59,7 +59,7 @@ const Search = () => {
   const searchResults = (
     <>
       <h2 className="section-title">Search Result</h2>
-      <div className={`list-container`}>
+      <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4`}>
         {data.map((item, index) => {
           const isMovie = item.type === "movie";
           const content = isMovie ? item.movie : item.show;
@@ -78,7 +78,13 @@ const Search = () => {
                 content.ids.slug
               }`}
             >
-              <img srcSet={`${imageUrl}`} loading="lazy" alt={content.title} />
+              <div >
+                <img
+                  srcSet={`${imageUrl}`}
+                  loading="lazy"
+                  alt={content.title}
+                />
+              </div>
               <p>{`${content.title.slice(0, 28)}${
                 content.title.length > 28 ? "..." : ""
               }`}</p>
@@ -92,13 +98,14 @@ const Search = () => {
   return (
     <>
       <div className="search-container">
+
         <form onSubmit={(e) => handleSubmit(e)}>
           <input
             className="text-black"
             type="search"
             name="query"
             value={search}
-            placeholder="Search..."
+            placeholder="🎬 Every Movie Tells a Story — Find Yours & Start Watching! 🍿"
             onChange={handleChange}
           />
           <button className="">Search</button>

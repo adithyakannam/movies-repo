@@ -52,13 +52,13 @@ const UpComming = () => {
     }
 
     return (
-      <div style={style}>
+      <div style={style} className="upcoming-done">
         <NavLink
           to={`/up-comming/movies/${item.ids.slug}`}
           state={"movies"}
-          className={`list-item `}
+          className={`list-item`}
         >
-          <div className="movie-card">
+          <div className="w-[15em] ">
             <img src={imageUrl} alt={item.title} className="" />
             <p className="movie-title-card text-lg">{item.title}</p>
           </div>
@@ -68,25 +68,25 @@ const UpComming = () => {
   };
 
   return (
-    <div className="mx-auto">
+    <div >
       {movies && (
         <div
           style={{
-            height: "100vh",
+            height: "90vh",
+            marginTop: "10vh",
             width: "100%",
-            paddingTop: "5em",
-            overflow: "hidden",
           }}
         >
           <AutoSizer>
             {({ width, height }) => (
               <Grid
                 columnCount={columnCount}
-                columnWidth={width / (columnCount + 0.5)}
+                columnWidth={250}
                 height={height}
                 rowCount={Math.ceil(movies.length / columnCount)}
                 rowHeight={350}
                 width={width}
+                className="upcomming-list"
               >
                 {Cell}
               </Grid>

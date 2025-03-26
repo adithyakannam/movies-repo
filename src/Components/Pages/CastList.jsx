@@ -43,7 +43,7 @@ const CastList = () => {
           <ul className="grid-container">
             {cast.slice(0, 10).map((member) => (
               <li key={member.person.ids.slug} className="grid-item">
-                <div className="w-[200px] h-[300px] overflow-hidden border-1">
+                <div>
                   <img
                     src={`https://${
                       member.images.headshot?.[0] ||

@@ -31,7 +31,7 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
       <form
-        className="bg-slate-200 rounded-lg p-5 shadow-md text-black w-full max-w-xl min-h-[50vh] flex flex-col justify-center items-center"
+        className="bg-slate-200  rounded-lg p-5 shadow-md text-black w-full max-w-xl  h-[50vh] flex flex-col justify-center items-center"
         onSubmit={handleSubmit}
       >
         <h2 className="text-2xl font-bold text-center">Login</h2>

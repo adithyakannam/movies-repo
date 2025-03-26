@@ -4,7 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const MovieSkeleton = () => {
     return (
-        <div className="relative flex justify-center items-center w-full h-screen bg-gray-900">
+        <div className="movie-box bg-gray-900">
             {/* Back Button */}
             <button className="fixed z-1 top-25 left-10 hover:bg-gray-00 text-gray-400 p-2 rounded-full transition-all duration-300 cursor-pointer">
                 <Skeleton circle={true} height={40} width={40} />
@@ -16,7 +16,7 @@ const MovieSkeleton = () => {
             </div>
 
             {/* Content Container */}
-            <div className="flex flex-col md:flex-row items-center gap-8 px-8 md:px-16 py-10 rounded-lg w-[85%] mx-auto mt-10 ">
+            <div className="content-container mt-3 ">
                 <div className="w-[250px] flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
                     <Skeleton height={375} width={250} baseColor="gray" highlightColor="#444" />
                 </div>

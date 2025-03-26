@@ -28,7 +28,6 @@ const Trailer = ({ src }) => {
           height="514"
           src={videoUrl}
           title="Trailer"
-          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
