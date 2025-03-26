@@ -68,7 +68,7 @@ const TvShows = () => {
               state={"shows"}
               className={`list-item`}
             >
-              <div className="movie-card rounded-lg overflow-hidden ">
+              <div className="movie-card  overflow-hidden ">
                 <img
                   src={imageUrl}
                   alt={item.show.title}

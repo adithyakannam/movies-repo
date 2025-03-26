@@ -3,6 +3,7 @@ import TrendingCarousel from "../Loading/TrendingCarousel";
 import Api from "../../API/Api";
 import Features from "./Features";
 import { BiCameraMovie } from "react-icons/bi";
+import MovieExperience from "./MovieExperience";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -59,25 +60,10 @@ const Home = () => {
     }
   }, []);
 
-
   return (
     <div>
-      {/* <TrendingCarousel /> */}
-      <div className="bg-image">
-        <div className="left-col">
-          <h1>
-            <span className="camera">
-              <BiCameraMovie />
-            </span>
-            <span className="focus"></span>
-            Movies
-          </h1>
-        </div>
-        <div className="right-col">
-          
-        </div>
-      </div>
-      
+      <MovieExperience/>
+
       <div className="outer-container">
         {!loading && (
           <Features

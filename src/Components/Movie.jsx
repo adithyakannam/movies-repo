@@ -72,7 +72,7 @@ const Movie = () => {
   }, [name, type, location.pathname]);
 
   return (
-    <div className="relative ">
+    <div className="relative">
       {loading ? (
         <MovieSkeleton />
       ) : (
@@ -81,7 +81,7 @@ const Movie = () => {
         )
       )}
       {showTrailer && (
-        <div className="fixed h-auto inset-0 z-15 bg-black">
+        <div className="fixed h-full z-20 inset-0 z-15 bg-black">
           <Trailer src={trailerSrc} />
           <button
             onClick={handleHideTrailer}

@@ -8,8 +8,8 @@ const Features = ({ movieList, title, ranking }) => {
 
   return (
     <>
-      <h2 className="section-title m-0">{title}</h2>
-      <div className={`list-container`}>
+      <h2 className="section-title ">{title}</h2>
+      <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2`}>
         {movieList.map((item, index) => {
           let imageUrl = item.movie.images.poster?.[0] || fallbackImage;
 
@@ -29,7 +29,7 @@ const Features = ({ movieList, title, ranking }) => {
                   src={`${imageUrl}`}
                   loading="lazy"
                   alt={item.movie.title}
-                  className="h-[22em]"
+                  className="related-poster m-auto w-[200px] h-auto object-cover rounded-lg shadow-md"
                 />
                 {ranking && <span className="index">{index + 1}</span>}
               </div>

@@ -25,19 +25,28 @@ a {
   color: black;
   text-decoration: none;
 }
+
+/* Navbar Styles */
+
+.navbar-container {
+  height: 10vh;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+}
 .navbar {
   width: 100%;
-  height: 10vh;
+  height: inherit;
   background-color: #28282a00;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  z-index: 20;
-  top: 0;
+
   padding: 0 3em;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .navbar > div {
   display: flex;
   align-items: center;
@@ -56,18 +65,30 @@ ul {
 .navbar a:hover {
   text-decoration: #18a5c8 underline;
 }
+
+/* Hamburger Menu Styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
 .grid-container {
   display: grid;
-  height: 100%;
-  gap: 1.8em;
-  width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  grid-template-rows: auto;
+  gap: 1em;
 }
 
 .grid-item {
-  /* background-color: #333; */
   color: #fff;
   border-radius: 10px;
   text-align: center;
@@ -85,8 +106,6 @@ ul {
   width: 100%;
   height: 100%;
   background-color: #262c42;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
 .list-container::-webkit-scrollbar {
@@ -98,9 +117,7 @@ ul {
   margin: 0 auto 1em auto;
   flex: 0 0 auto;
   position: relative;
-  padding: 0.8em;
-  width: 200px;
-  /* height: 20em; */
+  padding: 0.5em;
 }
 
 .list-item p {
@@ -123,8 +140,7 @@ span.index {
   font-family: "Londrina Outline", serif;
   font-weight: bold;
   position: absolute;
-  z-index: 2;
-  bottom: .3em;
+  bottom: 0.3em;
   left: 0.2em;
   font-size: 7.5em;
   color: #219ebc;
@@ -147,14 +163,13 @@ span.index {
 .movie-cards {
   max-width: 1200px;
   margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1em;
 }
 
-.movie-card {
-  border-radius: 10px;
-}
 .movie-card > img {
   width: 100%;
-  /* height: 90%; */
   border-bottom: 3px solid #219ebc;
   transition: transform 0.3s ease;
 }
@@ -193,26 +208,26 @@ span.index {
   }
 }
 
-/* genres */
-
+/* Genres List Styles */
 .genres-list {
   display: none;
-  position: relative;
-}
-.genres-button:hover + .genres-list,
-.genres-list:hover {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
   position: absolute;
   top: 3.5em;
-  left: 18em;
+  left: 2em;
   background-color: #18181b;
-  width: auto;
+  width: 40%;
   border-radius: 0.2em;
   padding: 1em;
   z-index: 10;
   cursor: pointer;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
 }
+
+.genres-button + .genres-list,
+.genres-list:hover {
+  display: grid;
+}
+
 .genres-list > li:hover span {
   text-decoration: #18a5c8 underline;
 }
@@ -251,7 +266,6 @@ span.index {
 /* search */
 
 .search-container {
-  padding: 1em;
   border-radius: 10px;
   margin: 2em auto;
   width: 80%;
@@ -351,7 +365,18 @@ form button:hover {
 .movie-title {
   font-family: "Poppins", sans-serif;
 }
-
+.upcomming-list > div {
+  position: absolute;
+  margin: auto;
+}
+.upcomming-list img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
 
 /* SignUp Component Styles */
 .signup-container {
@@ -428,7 +453,6 @@ form button:hover {
   cursor: pointer;
 }
 
-
 .signup-footer {
   text-align: center;
   color: #ffffff;
@@ -449,13 +473,12 @@ form button:hover {
 }
 
 /* hover image */
-.hover-image img{
+.hover-image img {
   transition: transform 0.5s ease;
 }
 .hover-image:hover img {
   transform: scale(1.1);
 }
-
 
 /* Profile Component Styles */
 .profile-container {
@@ -528,4 +551,234 @@ form button:hover {
 
 .profile-button:hover {
   background-color: #c53030;
+}
+
+/* Movie Component */
+.movie-box {
+  /* position: relative; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.content-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  height: 100vh;
+}
+.back-button {
+  position: fixed;
+  z-index: 1;
+  top: 7em;
+  left: 1em;
+  color: white;
+  padding: 0.5em;
+  border-radius: 50%;
+  transition: all 0.3s;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.back-button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.movie-details {
+  color: white;
+  opacity: 1;
+  padding: 1em 2em;
+  margin: 1em 2em;
+  font-size: 1em;
+  backdrop-filter: blur(10px);
+  background-color: rgba(39, 37, 37, 0.3);
+}
+
+/* Responsive Navbar Styles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 1em;
+  }
+
+  .navbar > div {
+    flex-direction: column;
+    width: 100%;
+    display: none; /* Hide menu items by default */
+  }
+
+  .navbar > div.active {
+    display: flex; /* Show menu items when active */
+  }
+
+  .navbar a,
+  ul {
+    font-size: 1em;
+    padding: 0.5em 0;
+  }
+
+  .hamburger {
+    display: flex; /* Show hamburger menu */
+  }
+
+  .hamburger.active div:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .hamburger.active div:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active div:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  .genres-list {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    width: 100vw;
+    height: 100%;
+  }
+  .navbar-container {
+    z-index: 3;
+    height: 0;
+  }
+
+  .hamburger {
+    display: inline-block;
+    position: absolute;
+    z-index: 3;
+    right: 1em;
+    top: 1em;
+  }
+
+  .navbar {
+    all: unset;
+  }
+  .navbar a,
+  ul {
+    font-size: 0.9em;
+    padding: 0.4em 0;
+  }
+
+  .navbar > div {
+    background-color: #18181b;
+    align-items: start;
+    padding-left: 1em;
+
+  }
+
+  .navbar > div + div {
+    /* padding: 2em; */
+    /* border: 2px solid red; */
+  }
+
+  .menu span {
+    display: none;
+  }
+
+  .container {
+    margin-top: 0;
+  }
+
+  .outer-container {
+    height: 100%;
+    width: 100%;
+  }
+
+  .movie-cards {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    padding: 0;
+  }
+
+  .search-container {
+    width: 95%;
+  }
+
+  input[type="search"] {
+    font-size: 0.9em;
+    padding: 0.4em;
+  }
+
+  form button {
+    padding: 1em 1.5em;
+    font-size: 0.8em;
+  }
+
+  /* Show genres list below the button in mobile */
+  .genres-list {
+    padding: 0 0 0 1em;
+    position: relative;
+    background-color: #18181b;
+    width: 100%;
+    top: 0.8em;
+    left: -0.4em;
+    border-radius: 0.2em;
+  }
+
+  /* When active, show the genres list */
+  .genres-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(120px, 1fr));
+  }
+
+  /* Ensure items are spaced out properly */
+  .genres-list li {
+    padding: 0.1em;
+    font-size: 1.1em;
+  }
+
+  .content-container {
+    height: auto;
+    padding-top: 10em;
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .back-button {
+    top: 0.5em;
+    left: 0.8em;
+    z-index: 2;
+  }
+  .movie-details {
+    margin-top: 2em;
+    width: 100%;
+    padding: 0.8em;
+  }
+  .movie-details > div {
+    font-size: 0.8em;
+    /* border: 2px solid #219ebc; */
+  }
+  .search-container{
+    margin-top: 5em;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 2s ease-in-out;
+}
+
+.neon-text {
+  text-shadow: 0 0 10px #219ebc, 0 0 20px #219ebc, 0 0 30px #219ebc;
 }

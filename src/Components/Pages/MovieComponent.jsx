@@ -30,8 +30,6 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
         setIsInWatchlist((prev) => !prev);
         dispatch(deleteMovie(movie.ids.imdb));
       }
-    } else {
-      console.log("nope");
     }
   };
 
@@ -47,11 +45,11 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
     "img.freepik.com/free-photo/assortment-movie-elements-red-background-with-copy-space_23-2148457859.jpg?t=st=1741628541~exp=1741632141~hmac=a28963ec3815792e81a863be1540adaa17ba85b8acec2b231e909f8a90e3c47a&w=900";
 
   return (
-    <div className="relative flex justify-center items-center w-full h-screen">
+    <div className="movie-box">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="fixed z-1 top-25 left-10 hover:bg-black/20 text-white p-2 rounded-full transition-all duration-300 cursor-pointer"
+        className="back-button"
       >
         <IoMdArrowRoundBack className="text-3xl" />
       </button>
@@ -66,7 +64,7 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
       </div>
 
       {/* Content Container */}
-      <div className="flex flex-col md:flex-row items-center gap-8 px-8 md:px-16 py-10 rounded-lg w-[85%]">
+      <div className="content-container">
         {/* Movie Poster */}
         <div className="w-[250px] flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
           <img
@@ -76,17 +74,17 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
           />
         </div>
 
-        <div className="text-white opacity-100 px-5 py-4 backdrop-filter backdrop-blur-lg bg-opacity-30">
+        <div className="movie-details">
           <p className="text-[3em] font-bold text-blue-500 movie-title">
             {movie.title}
           </p>
           <p className="italic text-gray-300">{movie.tagline}</p>
-          <p className="text-xl">{movie.overview}</p>
+          <p className="text-lg">{movie.overview}</p>
 
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xl">
             <p>
               <strong>📅 Released:</strong>{" "}
-              <span className=" font-bold text-blue-500">
+              <span className="">
                 {
                   movie.released
                   // ? movie.released
@@ -96,38 +94,38 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
             </p>
             <p>
               <strong>⏳ Runtime:</strong>
-              <span className="text-blue-500">
+              <span className="">
                 {Math.floor(movie.runtime / 60)}h {movie.runtime % 60}m
               </span>
             </p>
             <p>
               <strong>🌍 Country:</strong>{" "}
-              <span className="text-blue-500">
+              <span className="">
                 {movie.country.toUpperCase()}
               </span>
             </p>
             <p>
               <strong>⭐ Rating:</strong>{" "}
-              <span className="text-blue-500">{movie.rating.toFixed(2)}</span> (
+              <span className="">{movie.rating.toFixed(2)}</span> (
               {movie.votes} votes )
             </p>
             <p>
               <strong>🗣 Language:</strong>{" "}
-              <span className="text-blue-500">
+              <span className="">
                 {movie.language.toUpperCase()}
               </span>
             </p>
             <p>
               <strong>🎭 Genres:</strong>{" "}
-              <span className="text-blue-500">{movie.genres?.join(", ")}</span>
+              <span className="">{movie.genres?.join(", ")}</span>
             </p>
             <p>
               <strong>🎥 Network:</strong>{" "}
-              <span className="text-blue-500">{movie.network}</span>
+              <span className="">{movie.network}</span>
             </p>
             <p>
               <strong>🥤 Status:</strong>{" "}
-              <span className="text-blue-500">{movie.status}</span>
+              <span className="">{movie.status}</span>
             </p>
           </div>
 
