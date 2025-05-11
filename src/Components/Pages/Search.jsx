@@ -34,7 +34,8 @@ const Search = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearchParams({ query: search });
+    const encodedSearch = encodeURIComponent(search);
+    setSearchParams({ query: encodedSearch });
     fetchMovie(search);
   };
 
@@ -45,8 +46,9 @@ const Search = () => {
   useEffect(() => {
     const query = searchParams.get("query");
     if (query) {
-      setSearch(query);
-      fetchMovie(query);
+      const decodedQuery = decodeURIComponent(query);
+      setSearch(decodedQuery);
+      fetchMovie(decodedQuery);
     } else {
       const cachedData = localStorage.getItem("searchData");
       if (cachedData) {
@@ -63,10 +65,25 @@ const Search = () => {
         {data.map((item, index) => {
           const isMovie = item.type === "movie";
           const content = isMovie ? item.movie : item.show;
-          let imageUrl = content.images.poster?.[0] || fallbackImage;
+          let imageUrl =
+            content?.images?.poster?.[0] ||
+            content?.images?.poster ||
+            fallbackImage;
 
-          if (imageUrl && !imageUrl.startsWith("https://")) {
-            imageUrl = "https://" + imageUrl; // Prepend protocol if missing
+          if (
+            typeof imageUrl === "string" &&
+            !imageUrl.startsWith("https://")
+          ) {
+            imageUrl = "https://" + imageUrl;
+          } else if (
+            Array.isArray(imageUrl) &&
+            typeof imageUrl[0] === "string"
+          ) {
+            imageUrl = imageUrl[0].startsWith("https://")
+              ? imageUrl[0]
+              : "https://" + imageUrl[0];
+          } else {
+            imageUrl = fallbackImage;
           }
 
           return (
@@ -78,7 +95,7 @@ const Search = () => {
                 content.ids.slug
               }`}
             >
-              <div >
+              <div>
                 <img
                   srcSet={`${imageUrl}`}
                   loading="lazy"
@@ -98,7 +115,6 @@ const Search = () => {
   return (
     <>
       <div className="search-container">
-
         <form onSubmit={(e) => handleSubmit(e)}>
           <input
             className="text-black"
