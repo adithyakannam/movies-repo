@@ -15,6 +15,7 @@ const Profile = () => {
 
   const logout = () => {
     localStorage.setItem("authenticated", JSON.stringify(false));
+    localStorage.clear();
     navigate("/");
   };
 
