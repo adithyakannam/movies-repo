@@ -158,7 +158,8 @@ const NavBar = () => {
               {authenticated ? (
                 <p className="text-xl flex flex-column justify-center items-center">
                   <span className="text-xl text-green-800">
-                    <LuCircleUser />
+                    {/* <LuCircleUser /> */}
+                    Account
                   </span>
                 </p>
               ) : (
