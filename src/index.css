@@ -671,6 +671,7 @@ form button:hover {
   }
 
   .navbar > div {
+    background-color: #18181b;
     align-items: start;
     padding-left: 1em;
 

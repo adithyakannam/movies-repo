@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import Api from "../API/Api";
 import { BiCameraMovie } from "react-icons/bi";
-import { LuCircleUser } from "react-icons/lu";
+import { LuCircleUser  } from "react-icons/lu";
 import { MdOutlineKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 const NavBar = () => {
@@ -18,7 +18,6 @@ const NavBar = () => {
   const containerRef = useRef(null);
   const [searchParams] = useSearchParams();
   const { name, type } = useParams();
-  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     if (containerRef.current) {
@@ -26,6 +25,7 @@ const NavBar = () => {
     }
   }, [name, type, searchParams.get("page")]);
 
+  let userName = "";
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,7 +40,6 @@ const NavBar = () => {
     };
     fetchData();
     let userDetails = JSON.parse(localStorage.getItem("userDetails"));
-    setUserName(userDetails.name);
   }, []);
 
   const activeStyle = {
@@ -154,24 +153,18 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div className={`${ham ? "active" : ""}`}>
-            <NavLink
-              style={({ isActive }) => (isActive ? activeStyle : null)}
-              to={"watchlist"}
-            >
-              Watchlist
-            </NavLink>
-            <NavLink
-              style={({ isActive }) => (isActive ? activeStyle : null)}
-              to={`${authenticated ? "profile" : "login"}`}
-            >
+            <Link to={"watchlist"}>Watchlist</Link>
+            <Link to={`${authenticated ? "profile" : "login"}`}>
               {authenticated ? (
-                <span className="text-xl flex flex-column justify-center items-center">
-                  {userName}
-                </span>
+                <p className="text-xl flex flex-column justify-center items-center">
+                  <span className="text-xl text-green-800">
+                    <LuCircleUser />
+                  </span>
+                </p>
               ) : (
                 "login"
               )}
-            </NavLink>
+            </Link>
           </div>
         </nav>
       </div>

@@ -67,63 +67,60 @@ const Seasons = ({ showName }) => {
       </div>
 
       {searchParams.get("season") && (
-        <div className="season-details bg-transparent text-white">
+        <div className="season-details bg-transparent text-white ">
           {seasonsData
             .filter(
               (season) => season.number === parseInt(searchParams.get("season"))
             )
             .map((season) => (
-              <div key={season.number} className="space-y-6 px-4">
-                <h2 className="text-3xl font-bold border-l-4 border-blue-500 p-2">
+              <div key={season.number} className="space-y-6 ">
+                <h2 className="text-3xl font-bold border-l-4  border-blue-500 p-2">
                   Season
                 </h2>
-
                 {/* Season Poster and Info */}
-                <div className="flex flex-col md:flex-row md:items-start items-center gap-6 max-w-7xl mx-auto">
+                <div className="flex flex-col w-[80%] m-auto md:flex-row items-center md:items-start gap-6 ">
                   <img
                     src={`https://${season.images.poster[0]}`}
                     alt={`Season ${season.number} Poster`}
-                    className="w-full max-w-xs h-auto rounded-lg shadow-lg border border-gray-700"
+                    className="w-70 h-auto rounded-lg shadow-lg border border-gray-700"
                   />
-                  <div className="px-4 py-4 w-full md:w-[70%] backdrop-filter backdrop-blur-lg bg-opacity-30 bg-black/30 rounded-md">
-                    <h2 className="text-2xl md:text-3xl font-bold">
-                      {season.title}
-                    </h2>
-                    <p className="text-gray-300 mt-2">{season.overview}</p>
-                    <p className="mt-2">Network: {season.network}</p>
-                    <p className="mt-1">Rating: {season.rating.toFixed(1)}</p>
-                    <p className="mt-1">
-                      Released:{" "}
-                      {season.first_aired
-                        ? season.first_aired.slice(0, 10)
-                        : ""}
-                    </p>
-                    <p className="mt-1">
-                      Episodes {season.aired_episodes}/{season.episode_count}
-                    </p>
+                  <div className="px-5 w-[80%] h-[50%] py-4 backdrop-filter backdrop-blur-lg bg-opacity-30">
+                    <div>
+                      <h2 className="text-3xl font-bold">{season.title}</h2>
+                      <p className="text-gray-300 mt-2">{season.overview}</p>
+                      <p>Network: {season.network}</p>
+                      <p>Rating: {season.rating.toFixed(1)}</p>
+                      <p>
+                        Released:{" "}
+                        {season.first_aired
+                          ? season.first_aired.slice(0, 10)
+                          : ""}
+                      </p>
+                      <p>
+                        Episodes {season.aired_episodes}/{season.episode_count}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
                 {/* Episodes List */}
-                <h3 className="text-2xl font-semibold border-l-4 mt-5 border-blue-500 p-2">
+                <h3 className="text-2xl font-semibold border-l-4 mt-5 border-blue-500 p-2 ">
                   Episodes
                 </h3>
-                <ul className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                   {season.episodes.map((episode) => (
                     <li
                       key={episode.number}
-                      className="rounded-lg p-3 shadow-lg hover:shadow-xl transition backdrop-filter backdrop-blur-lg bg-opacity-30 bg-black/30 flex flex-col sm:flex-row gap-4"
+                      className="rounded-lg p-2 shadow-md hover:shadow-lg transition flex items-center borde-r-2  border-blue-500 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30"
                     >
                       <img
                         src={`https://${episode.images.screenshot[0]}`}
                         alt={`Episode ${episode.number} Screenshot`}
-                        className="w-full sm:w-[40%] h-auto object-cover rounded"
+                        className="w-[35%] h-35 object-cover mx-3"
                       />
-                      <div className="w-full sm:w-[60%]">
-                        <h3 className="font-semibold mb-2">
-                          Episode {episode.number}: {episode.title}
-                        </h3>
-                        <p className="text-gray-400 text-sm mb-2">
+                      <div className="w-[65%]">
+                        <h3 className="font-semibold my-3">{`Episode ${episode.number}: ${episode.title}`}</h3>
+                        <p className="text-gray-400 text-sm mb-1">
                           {episode.overview}
                         </p>
                         <p className="text-sm text-gray-400">

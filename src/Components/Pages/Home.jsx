@@ -9,50 +9,19 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState({});
 
-  // Helper to store item with expiry
-  const setWithExpiry = (key, value, ttl) => {
-    const now = new Date();
-    const item = {
-      value,
-      expiry: now.getTime() + ttl,
-    };
-    localStorage.setItem(key, JSON.stringify(item));
-  };
-
-  // Helper to retrieve item with expiry check
-  const getWithExpiry = (key) => {
-    const itemStr = localStorage.getItem(key);
-    if (!itemStr) return null;
-
-    try {
-      const item = JSON.parse(itemStr);
-      const now = new Date();
-
-      if (now.getTime() > item.expiry) {
-        localStorage.removeItem(key);
-        return null;
-      }
-
-      return item.value;
-    } catch {
-      localStorage.removeItem(key);
-      return null;
-    }
-  };
-
   const fetchApi = async () => {
     try {
       const response1 = await Api.get("/movies/watched/weekly?extended=images");
-      setWithExpiry("mostWatched", response1.data, 86400000);
+      localStorage.setItem("mostWatched", JSON.stringify(response1.data));
 
       const response2 = await Api.get("/movies/favorited/year?extended=images");
-      setWithExpiry("Popular", response2.data, 86400000);
+      localStorage.setItem("Popular", JSON.stringify(response2.data));
 
       const response3 = await Api.get("/movies/boxoffice?extended=images");
-      setWithExpiry("boxOffice", response3.data, 86400000);
+      localStorage.setItem("boxOffice", JSON.stringify(response3.data));
 
       const response4 = await Api.get("/movies/trending?extended=images");
-      setWithExpiry("trending", response4.data, 86400000);
+      localStorage.setItem("trending", JSON.stringify(response4.data));
 
       setMovies({
         trending: response4.data,
@@ -68,10 +37,10 @@ const Home = () => {
   };
 
   useEffect(() => {
-    const cachedMostWatched = getWithExpiry("mostWatched");
-    const cachedPopular = getWithExpiry("Popular");
-    const cachedBoxOffice = getWithExpiry("boxOffice");
-    const cachedTrending = getWithExpiry("trending");
+    const cachedMostWatched = localStorage.getItem("mostWatched");
+    const cachedPopular = localStorage.getItem("Popular");
+    const cachedBoxOffice = localStorage.getItem("boxOffice");
+    const cachedTrending = localStorage.getItem("trending");
 
     if (
       cachedMostWatched &&
@@ -80,10 +49,10 @@ const Home = () => {
       cachedTrending
     ) {
       setMovies({
-        trending: cachedTrending,
-        watched: cachedMostWatched,
-        favorited: cachedPopular,
-        boxOffice: cachedBoxOffice,
+        trending: JSON.parse(cachedTrending),
+        watched: JSON.parse(cachedMostWatched),
+        favorited: JSON.parse(cachedPopular),
+        boxOffice: JSON.parse(cachedBoxOffice),
       });
       setLoading(false);
     } else {
@@ -93,7 +62,7 @@ const Home = () => {
 
   return (
     <div>
-      <MovieExperience />
+      <MovieExperience/>
 
       <div className="outer-container">
         {!loading && (
