@@ -67,7 +67,7 @@ const Seasons = ({ showName }) => {
       </div>
 
       {searchParams.get("season") && (
-        <div className="season-details bg-transparent text-white ">
+        <div className="season-details bg-transparent text-white px-2 sm:px-5 lg:px-6 ">
           {seasonsData
             .filter(
               (season) => season.number === parseInt(searchParams.get("season"))
@@ -84,19 +84,27 @@ const Seasons = ({ showName }) => {
                     alt={`Season ${season.number} Poster`}
                     className="w-70 h-auto rounded-lg shadow-lg border border-gray-700"
                   />
-                  <div className="px-5 w-[80%] h-[50%] py-4 backdrop-filter backdrop-blur-lg bg-opacity-30">
+                  <div className="px-4 sm:px-6 lg:px-8 w-full sm:w-11/12 md:w-10/12 lg:w-8/12 h-auto  py-6 backdrop-filter backdrop-blur-lg bg-opacity-30 mx-auto">
                     <div>
-                      <h2 className="text-3xl font-bold">{season.title}</h2>
-                      <p className="text-gray-300 mt-2">{season.overview}</p>
-                      <p>Network: {season.network}</p>
-                      <p>Rating: {season.rating.toFixed(1)}</p>
-                      <p>
+                      {/* <h2 className="text-2xl sm:text-3xl font-bold">
+                        {season.title}
+                      </h2> */}
+                      <p className="text-gray-300 mt-2 text-sm sm:text-base">
+                        {season.overview}
+                      </p>
+                      <p className="text-sm sm:text-base">
+                        Network: {season.network}
+                      </p>
+                      <p className="text-sm sm:text-base">
+                        Rating: {season.rating.toFixed(1)}
+                      </p>
+                      <p className="text-sm sm:text-base">
                         Released:{" "}
                         {season.first_aired
                           ? season.first_aired.slice(0, 10)
                           : ""}
                       </p>
-                      <p>
+                      <p className="text-sm sm:text-base">
                         Episodes {season.aired_episodes}/{season.episode_count}
                       </p>
                     </div>
@@ -107,24 +115,25 @@ const Seasons = ({ showName }) => {
                 <h3 className="text-2xl font-semibold border-l-4 mt-5 border-blue-500 p-2 ">
                   Episodes
                 </h3>
-                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 md:px-0">
                   {season.episodes.map((episode) => (
                     <li
                       key={episode.number}
-                      className="rounded-lg p-2 shadow-md hover:shadow-lg transition flex items-center borde-r-2  border-blue-500 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30"
+                      className="rounded-lg p-3 shadow-md hover:shadow-lg transition flex flex-col sm:flex-row items-center sm:items-start  border-blue-500 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30"
                     >
                       <img
-                        src={`https://${episode.images.screenshot[0]}`}
+                        src={`https://${episode.images.screenshot?.[0]}`}
                         alt={`Episode ${episode.number} Screenshot`}
-                        className="w-[35%] h-35 object-cover mx-3"
+                        className="hidden sm:block sm:w-[35%] h-auto object-cover mb-3 sm:mb-0 sm:mr-4"
                       />
-                      <div className="w-[65%]">
-                        <h3 className="font-semibold my-3">{`Episode ${episode.number}: ${episode.title}`}</h3>
+
+                      <div className="w-full sm:w-[65%] px-3">
+                        <h3 className="font-semibold mb-2">{`Episode ${episode.number}: ${episode.title}`}</h3>
                         <p className="text-gray-400 text-sm mb-1">
                           {episode.overview}
                         </p>
                         <p className="text-sm text-gray-400">
-                          ⭐ {episode.rating.toFixed(1)}
+                          ⭐ {episode.rating?.toFixed(1)}
                         </p>
                       </div>
                     </li>
