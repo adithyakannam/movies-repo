@@ -40,7 +40,10 @@ const NavBar = () => {
       }
     };
     fetchData();
-    setUserDetails(JSON.parse(localStorage.getItem("userDetails")))
+    const user = JSON.parse(localStorage.getItem("loggedInUser"))?.data || ''
+    if(user){
+      setUserDetails(user)
+    } 
   }, []);
 
   const activeStyle = {

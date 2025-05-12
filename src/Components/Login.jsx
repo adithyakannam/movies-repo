@@ -7,22 +7,50 @@ const Login = () => {
   const [userPassword, setPassword] = useState("");
   const navigate = useNavigate();
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const user = JSON.parse(localStorage.getItem("userDetails"));
+  //     if (user) {
+  //       alert("Login successful!");
+  //       localStorage.setItem("authenticated", JSON.stringify(true));
+  //       navigate("/"); // Redirect to dashboard
+  //     } else {
+  //       alert("Invalid email or password!");
+  //       localStorage.setItem("authenticated", JSON.stringify(false));
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const user = JSON.parse(localStorage.getItem("userDetails"));
-      if (user) {
-        alert("Login successful!");
-        localStorage.setItem("authenticated", JSON.stringify(true));
-        navigate("/"); // Redirect to dashboard
-      } else {
-        alert("Invalid email or password!");
-        localStorage.setItem("authenticated", JSON.stringify(false));
-      }
-    } catch (error) {
-      console.log(error);
+  e.preventDefault();
+  try {
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser) {
+      const user = JSON.parse(storedUser)?.data || JSON.parse(storedUser);
+
+      alert("Login successful!");
+      saveWithExpiry("authenticated", true);
+      saveWithExpiry("loggedInUser", user); // Save user with timestamp too
+      navigate("/"); // Redirect to dashboard
+    } else {
+      alert("Invalid email or password!");
+      saveWithExpiry("authenticated", false);
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const saveWithExpiry = (key, data) => {
+  const item = {
+    data: data,
+    timestamp: new Date().getTime(),
   };
+  localStorage.setItem(key, JSON.stringify(item));
+};
 
   const handleSignupNavigation = () => {
     navigate('/signup');
