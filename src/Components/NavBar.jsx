@@ -166,7 +166,7 @@ const NavBar = () => {
             <Link to={`${authenticated ? "profile" : "login"}`}>
               {authenticated ? (
                 <span className="text-xl flex flex-column justify-center items-center">
-                   {userDetails?.name}
+                   {userDetails?.name || '' }
                 </span>
               ) : (
                 "login"
