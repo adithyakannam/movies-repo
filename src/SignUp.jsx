@@ -13,7 +13,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("userDetails", JSON.stringify(formData));
+    localStorage.setItem("loggedInUser", JSON.stringify(formData));
     navigate("/login");
     // try {
     //   const response = await userFetch.post("users", formData);
