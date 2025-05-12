@@ -14,7 +14,7 @@ const MovieComponent = ({ movie, handleShowTrailer }) => {
   const location = useLocation();
 
   const toggleWatchlist = (movie) => {
-    const authenticated = localStorage.getItem("authenticated") === "true";
+    const authenticated = JSON.parse(localStorage.getItem("authenticated")).data === "true";
     if (authenticated) {
       if (!isInWatchlist) {
         setIsInWatchlist((prev) => !prev);
