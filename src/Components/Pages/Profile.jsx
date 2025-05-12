@@ -19,8 +19,8 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("userDetails") || "{}");
-    setUserDetails(storedUser);
+    const storedUser = JSON.parse(localStorage.getItem("loggedInUser") || "{}");
+    setUserDetails(storedUser.data);
   }, [movies]); // Call only when movies change
 
   return (
