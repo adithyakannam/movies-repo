@@ -18,7 +18,11 @@ const NavBar = () => {
   const containerRef = useRef(null);
   const [searchParams] = useSearchParams();
   const { name, type } = useParams();
-  const [userDetails,setUserDetails] = useState({})
+   const [userDetails, setUserDetails] = useState({
+      name: "",
+      phone: "",
+      email: "",
+    });
 
   useEffect(() => {
     if (containerRef.current) {
@@ -42,6 +46,7 @@ const NavBar = () => {
     fetchData();
     const user = JSON.parse(localStorage.getItem("loggedInUser"))?.data || ''
     if(user){
+      console.log(user)
       setUserDetails(user)
     } 
   }, []);
@@ -54,7 +59,7 @@ const NavBar = () => {
     setHam(false);
   }, [name, type, searchParams]);
 
-  let authenticated = JSON.parse(localStorage.getItem("authenticated"));
+  let authenticated = JSON.parse(localStorage.getItem("authenticated"))?.data || '';
 
   const loginFunction = () => {
     authenticated = JSON.parse(localStorage.getItem("authenticated"));
@@ -161,7 +166,7 @@ const NavBar = () => {
             <Link to={`${authenticated ? "profile" : "login"}`}>
               {authenticated ? (
                 <span className="text-xl flex flex-column justify-center items-center">
-                   {userDetails?.name || ''}
+                   {userDetails?.name || '' }
                 </span>
               ) : (
                 "login"

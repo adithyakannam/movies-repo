@@ -14,7 +14,8 @@ const Profile = () => {
   const movies = useSelector((state) => state.movies.movies);
 
   const logout = () => {
-    localStorage.setItem("authenticated", JSON.stringify(false));
+    localStorage.setItem("authenticated", JSON.stringify({data:"false",timestamp:null}));
+    localStorage.clear()
     navigate("/");
   };
 
