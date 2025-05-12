@@ -7,7 +7,7 @@ const PrivateRoute = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const auth = JSON.parse(localStorage.getItem("authenticated"));
+    const auth = JSON.parse(localStorage.getItem("authenticated")).data;
     
     if (auth) {
       setAuthenticated(true);
