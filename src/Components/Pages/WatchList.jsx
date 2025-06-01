@@ -20,7 +20,7 @@ const Watchlist = () => {
         {movies.map(({ id, movie, type }) => (
           <li
             key={id}
-            className="bg-gray-900  rounded-lg shadow-lg overflow-hidden flex flex-column justify-between hover-image"
+            className="bg-gray-900  rounded-lg shadow-lg overflow-hidden flex flex-column juspwatctify-between hover-image"
           >
             <NavLink to={`${type}/${movie.ids.slug}`} state={"movies"}>
               <div className="relative">
