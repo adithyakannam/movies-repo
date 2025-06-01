@@ -19,7 +19,7 @@ export default function MovieExperience() {
         ></iframe> */}
       </div>
 
-      <div className="relative z-10 text-center px-6 md:px-2 py-4 md:py-0">
+      <div className="relative  text-center px-6 md:px-2 py-4 md:py-0">
         {/* Title with Icon */}
         <h1 className="text-6xl font-extrabold flex items-center justify-center space-x-4 neon-text">
           <span className="text-red-500">

@@ -13,7 +13,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("loggedInUser", JSON.stringify(formData));
+    saveWithExpiry("loggedInUser", formData); // Save user with timestamp too
     navigate("/login");
     // try {
     //   const response = await userFetch.post("users", formData);
@@ -26,6 +26,14 @@ const SignUp = () => {
     //   console.log(error);
     // }
   };
+
+  const saveWithExpiry = (key, data) => {
+  const item = {
+    data: data,
+    timestamp: new Date().getTime(),
+  };
+  localStorage.setItem(key, JSON.stringify(item));
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
