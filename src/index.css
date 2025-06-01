@@ -604,6 +604,7 @@ form button:hover {
     flex-direction: column;
     height: auto;
     padding: 1em;
+    z-index: 20;
   }
 
   .navbar > div {

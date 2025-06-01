@@ -15,7 +15,7 @@ const Profile = () => {
 
   const logout = () => {
     localStorage.setItem("authenticated", JSON.stringify({data:"false",timestamp:null}));
-    localStorage.clear()
+    // localStorage.removeItem("loggedInUser");
     navigate("/");
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { userFetch } from "../API/Api";
 
@@ -24,16 +24,14 @@ const Login = () => {
   //   }
   // };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
   e.preventDefault();
   try {
-    const storedUser = localStorage.getItem("loggedInUser");
-    if (storedUser) {
-      const user = JSON.parse(storedUser)?.data || JSON.parse(storedUser);
-
+    const email = JSON.parse(localStorage.getItem("loggedInUser"))?.data?.email || ""
+    const password = JSON.parse(localStorage.getItem("loggedInUser"))?.data?.password || ""
+    if (email === userEmail && password === userPassword) {
       alert("Login successful!");
       saveWithExpiry("authenticated", true);
-      saveWithExpiry("loggedInUser", user); // Save user with timestamp too
       navigate("/"); // Redirect to dashboard
     } else {
       alert("Invalid email or password!");
