@@ -15,6 +15,7 @@ import Login from "./Components/Login";
 import PrivateRoute from "./Components/PrivateRoute";
 import SignUp from "./SignUp";
 import Profile from "./Components/Pages/Profile";
+import Credits from "./Components/Credits";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             </Route>
             <Route path="profile" element={<PrivateRoute/>}>
               <Route index element={<Profile/>} />
+              <Route path="credits" element={<Credits/>} />
             </Route>
             <Route path="*" element={<Fallback />} />
           </Route>
