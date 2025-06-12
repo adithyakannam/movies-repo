@@ -29,6 +29,7 @@ const Login = () => {
   try {
     const email = JSON.parse(localStorage.getItem("loggedInUser"))?.data?.email || ""
     const password = JSON.parse(localStorage.getItem("loggedInUser"))?.data?.password || ""
+    
     if (email === userEmail && password === userPassword) {
       alert("Login successful!");
       saveWithExpiry("authenticated", true);
