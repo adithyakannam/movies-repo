@@ -43,6 +43,14 @@ const Profile = () => {
           >
             Logout
           </button>
+          <button 
+            className=" mx-2"
+            style={{ backgroundColor: "#1976d2", color: "#fff", border: "none", borderRadius: "4px", padding: "0.5rem 1.5rem" }}
+            onClick={()=>navigate("/profile/credits")
+            }
+          >
+            Credits
+          </button>
         </div>
       </div>
     </div>
